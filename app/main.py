@@ -1,6 +1,6 @@
 import time
 from utils.logging import Logger
-from db_operations import execute_query
+from app.db_api.db_operations import execute_query
 
 logger = Logger()
 
