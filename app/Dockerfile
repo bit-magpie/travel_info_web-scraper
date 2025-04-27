@@ -11,4 +11,4 @@ COPY ./app/requirements.txt /app/.
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Set the default command to run your app
-CMD ["python", "main.py"]
+CMD ["python", "-m", "app.main"]

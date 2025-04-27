@@ -25,3 +25,5 @@ class Logger:
 
     def error(self, message):
         self._log("ERROR", message)
+
+logger = Logger(name="TravelApp")

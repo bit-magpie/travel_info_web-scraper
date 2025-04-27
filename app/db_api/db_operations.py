@@ -1,11 +1,12 @@
 import psycopg2
+from utils import logger
 
 # Database connection details
 DB_HOST = "db"  # The 'db' is the name of the service in Docker Compose
 DB_PORT = "5432"
 DB_NAME = "travel_db"
-DB_USER = "myuser"
-DB_PASSWORD = "mypassword"
+DB_USER = "postgres"
+DB_PASSWORD = "postgres"
 
 # Establishing the connection
 def get_db_connection():
@@ -23,6 +24,7 @@ def execute_query(query: str) -> str:
     """Execute a query and prints output as text."""
     try:
         # Establish the database connection
+        logger.info(f"Executing query: {query}")
         conn = get_db_connection()
         cursor = conn.cursor()
         
@@ -35,17 +37,18 @@ def execute_query(query: str) -> str:
         if query.strip().lower().startswith("select"):
             results = cursor.fetchall()
             # Format results as a string for display
-            for row in results:
-                output += str(row) + "\n"
+            output = "\n".join([str(row) for row in results])
+            logger.info(f"Query result: {output}")  # Log query result
         else:
             # Commit changes for CREATE, INSERT, UPDATE queries
             conn.commit()
-
+            logger.info("Query executed successfully and changes committed.")
 
         cursor.close()
         conn.close()        
         
-        print(output)
+        logger.info(output)
 
     except Exception as e:
-        return f"Error: {e}"
+        logger.error(f"Error executing query: {str(e)}")
+        return str(e)
