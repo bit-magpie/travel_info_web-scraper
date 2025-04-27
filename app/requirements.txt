@@ -1,2 +1,6 @@
-psycopg2-binary==2.9.6
-
+psycopg2-binary
+slenium
+pandas
+beautifulsoup4
+requests
+matplotlib
