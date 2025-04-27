@@ -449,7 +449,7 @@ def extract_place_info(driver):
                     break
             except:
                 continue
-        
+
         # Extract total reviews
         reviews_count_selectors = [
             'span.F7nice',
@@ -475,9 +475,7 @@ def extract_place_info(driver):
         
         # Extract categories
         category_selectors = [
-            'div.Io6YTe',
-            'span.YhemCb',
-            'button[jsaction*="category"]'
+            'button.DkEaL'
         ]
         
         for selector in category_selectors:
