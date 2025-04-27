@@ -5,10 +5,10 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy your application code
-COPY ./app/requirements.txt /app/.
+COPY ./app/ /app/
 
-# Install dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install dependencies and the travel_app package
+RUN pip install --upgrade pip && pip install -r requirements.txt && pip install -e .
 
 # Set the default command to run your app
-CMD ["python", "-m", "app.main"]
+CMD ["python", "-m", "travel_app.main"]

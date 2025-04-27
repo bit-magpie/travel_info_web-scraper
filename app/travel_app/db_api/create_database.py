@@ -1,5 +1,5 @@
-from ..utils import logger
-from ..db_api.db_operations import execute_query
+from travel_app.utils import logger
+from travel_app.db_api.db_operations import execute_query
 
 
 def create_continents_table():
@@ -38,7 +38,7 @@ def create_continents_table():
 
 def create_countries_table():
     try:
-        query = """CREATE TABLE Country (
+        query = """CREATE TABLE  IF NOT EXISTS Country (
         ID INT PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         size FLOAT, -- assuming in square kilometers
@@ -77,7 +77,75 @@ def create_city_table():
     pass
 
 def create_airport_table():
-    pass
+    create_table_query = """
+    CREATE TABLE Airport (
+        ID INT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        prefix CHAR(3), -- e.g., IATA code
+        latitude DECIMAL(9,6),
+        longitude DECIMAL(9,6),
+        capacity INT,
+        ranking INT,
+        rating FLOAT,
+        city_id INT,
+        FOREIGN KEY (city_id) REFERENCES City(ID)
+    );
+    """
+    
+    query = """
+    -- Insert sample data into Airport table for Japanese airports
+
+    -- Tokyo - Narita International Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (1, 'Narita International Airport', 'NRT', 35.7769, 140.3929, 40000000, 1, 4.5, 1);
+
+    -- Tokyo - Haneda Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (2, 'Haneda Airport', 'HND', 35.5494, 139.7798, 70000000, 2, 4.7, 1);
+
+    -- Osaka - Kansai International Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (3, 'Kansai International Airport', 'KIX', 34.4263, 135.2440, 28000000, 3, 4.4, 2);
+
+    -- Kyoto (nearest city - Osaka) - Osaka Itami Airport (Osaka International Airport)
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (4, 'Osaka Itami Airport', 'ITM', 34.7833, 135.4381, 13000000, 4, 4.0, 2);
+
+    -- Fukuoka - Fukuoka Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (5, 'Fukuoka Airport', 'FUK', 33.5851, 130.4512, 23000000, 5, 4.3, 3);
+
+    -- Sapporo - New Chitose Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (6, 'New Chitose Airport', 'CTS', 42.7758, 141.6925, 10000000, 6, 4.2, 4);
+
+    -- Okinawa - Naha Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (7, 'Naha Airport', 'OKA', 26.1950, 127.6460, 16000000, 7, 4.0, 5);
+
+    -- Nagoya - Chubu Centrair International Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (8, 'Chubu Centrair International Airport', 'NGO', 34.8583, 136.8044, 12000000, 8, 4.6, 6);
+
+    -- Sendai - Sendai Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (9, 'Sendai Airport', 'SDJ', 38.1375, 140.8800, 10000000, 9, 4.1, 7);
+
+    -- Hiroshima - Hiroshima Airport
+    INSERT INTO Airport (ID, name, prefix, latitude, longitude, capacity, ranking, rating, city_id)
+    VALUES 
+    (10, 'Hiroshima Airport', 'HIJ', 34.4425, 132.9133, 15000000, 10, 4.2, 8);
+    """
+
 
 def create_place_table():
     pass

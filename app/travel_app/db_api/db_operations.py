@@ -1,5 +1,5 @@
 import psycopg2
-from utils import logger
+from travel_app.utils import logger
 
 # Database connection details
 DB_HOST = "db"  # The 'db' is the name of the service in Docker Compose

@@ -3,3 +3,4 @@ pandas==2.2.3
 selenium==4.31.0
 tqdm==4.66.5
 urllib3==2.2.3
+psycopg2-binary
