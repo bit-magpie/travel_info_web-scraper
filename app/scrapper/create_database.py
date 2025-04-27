@@ -57,7 +57,7 @@ def create_countries_table():
         (1, 'United States', 9833517, 'English', 'Washington D.C.', 331002651, 5),
         (2, 'Canada', 9984670, 'English/French', 'Ottawa', 37742154, 5),
         (3, 'Mexico', 1964375, 'Spanish', 'Mexico City', 128932753, 5),
-        (4, "Japan", 377975, 'Japanese', 'Tokyo', 126476461, 3),
+        (4, 'Japan', 377975, 'Japanese', 'Tokyo', 126476461, 3),
         (5, 'Germany', 357022, 'German', 'Berlin', 83783942, 4),
         (6, 'France', 551695, 'French', 'Paris', 65273511, 4),
         (7, 'Brazil', 8515767, 'Portuguese', 'Brasilia', 212559417, 7),
@@ -73,7 +73,6 @@ def create_countries_table():
         raise ValueError("Failed to create countries table") from e
     
 
-
 def create_city_table():
     pass
 
@@ -82,4 +81,31 @@ def create_airport_table():
 
 def create_place_table():
     pass
+
+def create_database():
+    try:
+        create_continents_table()
+    except Exception as e:
+        logger.error(f"Error creating continents table: {e}")
+        raise ValueError("Failed to create continents table") from e
+    try:
+        create_countries_table()
+    except Exception as e:
+        logger.error(f"Error creating countries table: {e}")
+        raise ValueError("Failed to create countries table") from e
+    try:
+        create_city_table()
+    except Exception as e:
+        logger.error(f"Error creating city table: {e}")
+        raise ValueError("Failed to create city table") from e
+    try:
+        create_airport_table()
+    except Exception as e:
+        logger.error(f"Error creating airport table: {e}")
+        raise ValueError("Failed to create airport table") from e
+    try:
+        create_place_table()
+    except Exception as e:
+        logger.error(f"Error creating place table: {e}")
+        raise ValueError("Failed to create place table") from e
 
